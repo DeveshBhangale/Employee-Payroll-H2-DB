@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,10 +46,10 @@ public class EmployeeController {
 		return new ResponseEntity<>(responseDTO,HttpStatus.OK);
 	}
 	
-	@PutMapping("/update")
-	public ResponseEntity<ResponseDTO> updateEmployeePayrollData(@RequestBody EmployeePayrollDTO employeePayrollDTO){
+	@PutMapping("/update/{id}")
+	public ResponseEntity<ResponseDTO> updateEmployeePayrollData(@PathVariable("empId") int id,@RequestBody EmployeePayrollDTO employeePayrollDTO){
 		ResponseDTO responseDTO = new ResponseDTO("Updated Employee Payroll Successfully", 
-				employeePayrollService.updateEmployeePayrollData(employeePayrollDTO));
+				employeePayrollService.updateEmployeePayrollData(id,employeePayrollDTO));
 		return new ResponseEntity<>(responseDTO,HttpStatus.OK);
 	}
 	
