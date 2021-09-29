@@ -1,5 +1,6 @@
 package com.bridgelabz.employeepayroll.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import com.bridgelabz.employeepayroll.service.IEmployeePayrollService;
 
 
 @RestController
+@Slf4j
 @RequestMapping("/EmployeePayroll")
 public class EmployeeController {
 	
@@ -27,15 +29,17 @@ public class EmployeeController {
 	
 	@RequestMapping(value = {"/","","/getData"})
 	public ResponseEntity<ResponseDTO> getEmployeePayrollData() {
-		ResponseDTO responseDTO = new ResponseDTO("Get Call Successfull", 
+		ResponseDTO responseDTO = new ResponseDTO("Get Call Successful",
 				employeePayrollService.getEmployeePayrollData());
+		log.debug("Get Call Successful");
 		return new ResponseEntity<>(responseDTO,HttpStatus.OK);
 	}
 	
 	@GetMapping("/get")
 	public ResponseEntity<ResponseDTO> getEmployeePayrollData(@RequestParam int id){
-		ResponseDTO responseDTO = new ResponseDTO("Get Call ID Successfull", 
+		ResponseDTO responseDTO = new ResponseDTO("Get Call ID Successful",
 				employeePayrollService.getEmployeePayrollDataById(id));
+		log.debug("Get Call ID Successful");
 		return new ResponseEntity<>(responseDTO,HttpStatus.OK);
 	}
 	
@@ -43,6 +47,7 @@ public class EmployeeController {
 	public ResponseEntity<ResponseDTO> addEmployeePayrollData(@RequestBody EmployeePayrollDTO employeePayrollDTO){
 		ResponseDTO responseDTO = new ResponseDTO("Created Employee Payroll Successfully", 
 				employeePayrollService.addEmployeePayrollData(employeePayrollDTO));
+		log.debug("Created Employee Payroll Successfully");
 		return new ResponseEntity<>(responseDTO,HttpStatus.OK);
 	}
 	
@@ -50,6 +55,7 @@ public class EmployeeController {
 	public ResponseEntity<ResponseDTO> updateEmployeePayrollData(@PathVariable("empId") int id,@RequestBody EmployeePayrollDTO employeePayrollDTO){
 		ResponseDTO responseDTO = new ResponseDTO("Updated Employee Payroll Successfully", 
 				employeePayrollService.updateEmployeePayrollData(id,employeePayrollDTO));
+		log.debug("Created Employee Payroll Successfully");
 		return new ResponseEntity<>(responseDTO,HttpStatus.OK);
 	}
 	
@@ -58,6 +64,7 @@ public class EmployeeController {
 		employeePayrollService.deleteEmployeePayrollData(id);
 		ResponseDTO responseDTO = new ResponseDTO("Deleted Successfully", 
 				id);
+		log.debug("Created Employee Payroll Successfully");
 		return new ResponseEntity<>(responseDTO,HttpStatus.OK);
 	}
 }
