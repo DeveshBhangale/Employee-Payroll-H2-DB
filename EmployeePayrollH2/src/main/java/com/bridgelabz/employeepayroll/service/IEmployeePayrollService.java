@@ -9,7 +9,7 @@ import com.bridgelabz.employeepayroll.models.EmployeePayrollDTO;
 public interface IEmployeePayrollService {
 	List<Employee> getEmployeePayrollData(); 
 	
-	List<Employee> getEmployeePayrollDataById(int id) ;
+	Employee getEmployeePayrollDataById(int id) ;
 	
 	Employee addEmployeePayrollData( EmployeePayrollDTO employeePayrollDTO);
 	
