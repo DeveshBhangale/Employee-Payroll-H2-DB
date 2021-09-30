@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="employee_payroll1")
+
 @Data
 public class Employee {
 	@Id
