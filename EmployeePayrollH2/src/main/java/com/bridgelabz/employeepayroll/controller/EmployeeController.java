@@ -1,22 +1,16 @@
 package com.bridgelabz.employeepayroll.controller;
 
+import com.bridgelabz.employeepayroll.models.EmployeePayrollDTO;
+import com.bridgelabz.employeepayroll.models.ResponseDTO;
+import com.bridgelabz.employeepayroll.service.IEmployeePayrollService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.bridgelabz.employeepayroll.models.EmployeePayrollDTO;
-import com.bridgelabz.employeepayroll.models.ResponseDTO;
-import com.bridgelabz.employeepayroll.service.IEmployeePayrollService;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 @RestController
@@ -44,7 +38,7 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/add")
-	public ResponseEntity<ResponseDTO> addEmployeePayrollData(@RequestBody EmployeePayrollDTO employeePayrollDTO){
+	public ResponseEntity<ResponseDTO> addEmployeePayrollData(@Valid @RequestBody EmployeePayrollDTO employeePayrollDTO){
 		ResponseDTO responseDTO = new ResponseDTO("Created Employee Payroll Successfully", 
 				employeePayrollService.addEmployeePayrollData(employeePayrollDTO));
 		log.debug("Created Employee Payroll Successfully");
@@ -52,7 +46,7 @@ public class EmployeeController {
 	}
 	
 	@PutMapping("/update/{id}")
-	public ResponseEntity<ResponseDTO> updateEmployeePayrollData(@PathVariable("empId") int id,@RequestBody EmployeePayrollDTO employeePayrollDTO){
+	public ResponseEntity<ResponseDTO> updateEmployeePayrollData(@Valid @PathVariable("empId") int id,@RequestBody EmployeePayrollDTO employeePayrollDTO){
 		ResponseDTO responseDTO = new ResponseDTO("Updated Employee Payroll Successfully", 
 				employeePayrollService.updateEmployeePayrollData(id,employeePayrollDTO));
 		log.debug("Created Employee Payroll Successfully");
